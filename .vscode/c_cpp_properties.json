@@ -1,0 +1,36 @@
+{
+    "configurations": [
+        {
+            "name": "Linux clang",
+            // 指定代码中使用的头文件路径列表。
+            "includePath": [
+                "${workspaceFolder}/**"
+            ], 
+            // 定义预处理宏（如 #define 宏）。
+            "defines": [],
+            // 指定编译器路径
+            "compilerPath": "/usr/bin/clang",
+            // 指定 C 和 C++ 标准。
+            "cStandard": "c17",
+            "cppStandard": "c++20",
+            // 指定 IntelliSense 模式
+            "intelliSenseMode": "linux-clang-x64",
+            // VSCode 会使用 CMake Tools 插件来生成 IntelliSense 配置。
+            // 这样做可以不用手动配置 includePath 和 defines。
+            "configurationProvider": "ms-vscode.cmake-tools"
+        },
+        {
+            "name": "Linux gcc",
+            "includePath": [
+                "${workspaceFolder}/**"
+            ],
+            "defines": [],
+            "compilerPath": "/usr/bin/g++",
+            "cStandard": "c17",
+            "cppStandard": "c++20",
+            "intelliSenseMode": "linux-gcc-x64",
+            "configurationProvider": "ms-vscode.cmake-tools"
+        }
+    ],
+    "version": 4
+}
