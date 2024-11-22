@@ -4,8 +4,9 @@
 #include <iostream>
 #include <string>
 
-namespace module2 {
+namespace module2
+{
     void greet(const std::string& name);
 }
 
-#endif // MODULE2_H
+#endif  // MODULE2_H

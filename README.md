@@ -1,12 +1,12 @@
-# C++_project_template
+# VS Code C++ Project Template
 
 ## 项目介绍：
-    这是一个 C++ 项目模板，参考了其他项目工程并根据自己习惯总结出来，用于快速搭建 C++ 项目。
+    VS Code的C++ 项目文件配置和说明
 
 ## 项目结构：
 
 ```shell
-C++_project_template/
+Cpp_project_template/
 ├── .gitignore                  # Git 忽略文件
 ├── CMakeLists.txt              # CMake 构建文件
 ├── README.md                   # 项目介绍
