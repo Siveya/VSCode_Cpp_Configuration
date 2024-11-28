@@ -3,7 +3,6 @@
 	"tasks": [
 		// CMake 任务可以用CMake Tools 插件代替
 		// 1. 配置 CMake
-		// Debug
 		{
 			"label": "CMake: 配置 Debug",
 			"type": "shell",
@@ -22,7 +21,6 @@
 			"problemMatcher": [],
 			"detail": "CMake Debug 配置任务"
 		},
-		// Release
 		{
 			"label": "CMake: 配置 Release",
 			"type": "shell",
@@ -75,6 +73,35 @@
 			"group": "build",
 			"problemMatcher": [],
 			"detail": "清理构建目录中的文件"
+		},
+		// 组合任务
+		{
+			"label": "Rebuild",
+			"dependsOrder": "sequence", // "sequence"，任务按顺序执行。"parallel"， 并行执行任务
+			"dependsOn": [
+				"Clean Build",
+				"CMake: 配置 Debug",
+				"CMake: 编译 Debug",
+				"CMake: 配置 Release",
+				"CMake: 编译 Release"
+			],
+			"problemMatcher": [],
+			"detail": "清理并重新编译"
+		},
+		// 4. 运行单元测试
+		{
+			"label": "Run Tests",
+			"type": "shell",
+			"command": "ctest",
+			"args": [
+			],
+			"group": "test",
+			"problemMatcher": [],
+			"detail": "运行所有单元测试",
+			"options": {
+				"cwd": "${workspaceFolder}/build/Debug" // 设置工作目录
+			}
 		}
+		// 5. 安装 CMake
 	]
 }

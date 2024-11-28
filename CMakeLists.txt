@@ -21,3 +21,10 @@ add_executable(${PROJECT_NAME} ${SOURCE_FILES})
 
 # 添加头文件的路径到编译器的搜索路径中
 target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_SOURCE_DIR}/src)
+
+
+# 启用测试支持
+enable_testing()
+
+# 添加测试目录
+add_subdirectory(tests)
