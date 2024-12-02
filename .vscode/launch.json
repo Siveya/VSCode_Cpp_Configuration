@@ -2,7 +2,7 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "(gdb) 启动",
+            "name": "Linux (gdb) 启动",
             "type": "cppdbg",
             "request": "launch",
             "program": "${workspaceFolder}/build/Debug/cpp_project_template",
@@ -10,9 +10,9 @@
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
             "environment": [], // 可在此处添加环境变量
-            "externalConsole": false,
+            "externalConsole": false, // 是否使用外部终端
             "MIMode": "gdb",
-            "miDebuggerPath": "/usr/bin/gdb", // 可选：指定 gdb 路径
+            "miDebuggerPath": "/usr/bin/gdb", // gdb 路径
             "setupCommands": [
                 {
                     "description": "为 gdb 启用整齐打印",
@@ -25,6 +25,15 @@
                     "ignoreFailures": true
                 }
             ]
+        },
+        {
+            "name": "MAC (lldb) 启动",
+            "type": "lldb", // 由 CodeLLDB 插件提供
+            "request": "launch",
+            "program": "${workspaceFolder}/build/Debug/cpp_project_template",
+            "args": [],
+            "cwd": "${workspaceFolder}",
+            "stopOnEntry": false // 是否在入口处暂停
         }
     ]
 }
