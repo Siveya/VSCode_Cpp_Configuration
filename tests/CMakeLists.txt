@@ -1,6 +1,9 @@
 # 添加Google Test目录
 add_subdirectory(${CMAKE_SOURCE_DIR}/third_party/googletest googletest-build)
 
+# 包含测试模块，生成 DartConfiguration.tcl
+include(CTest)
+
 # 添加测试可执行文件
 file(GLOB TEST_SOURCES "*.cpp")
 add_executable(test_${PROJECT_NAME} ${TEST_SOURCES})
