@@ -54,6 +54,19 @@
             "cppStandard": "c++20",
             "intelliSenseMode": "macos-gcc-x64",
             "configurationProvider": "ms-vscode.cmake-tools"
+        },
+        // C_Cpp: IntelliSenseEngine 的开关打开 (装了 clang，你将无法把 C_Cpp：Intelli Sense Engine 开关设置为 Default, 需卸载clangd)
+        {
+            "name": "Windows x64",
+            "includePath": [
+                "${workspaceFolder}/**"
+            ],
+            "defines": [],
+            "compilerPath": "C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.36.32532/bin/Hostx64/x64/cl.exe",
+            "cStandard": "c17",
+            "cppStandard": "c++20",
+            "intelliSenseMode": "windows-msvc-x64",
+            "configurationProvider": "ms-vscode.cmake-tools"
         }
     ],
     "version": 4

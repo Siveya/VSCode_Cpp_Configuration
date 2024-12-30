@@ -1,4 +1,4 @@
-# VS Code C++ Project Template
+# VS Code C++ Configuration
 
 ## 项目介绍：
     VS Code的C++ 项目文件配置和说明
@@ -6,7 +6,7 @@
 ## 项目结构：
 
 ```shell
-Cpp_project_template/
+VSCode_Cpp_Configuration/
 ├── .vscode                     # vscode 配置文件
 │   ├── c_cpp_properties.json   # c/c++ 配置文件
 │   ├── launch.json             # 调试配置文件

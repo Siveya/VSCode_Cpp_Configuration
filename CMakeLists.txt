@@ -1,12 +1,18 @@
 # 指定构建项目所需的最低 CMake 版本
 cmake_minimum_required(VERSION 3.12)
-# cpp_project_template 为项目名
-project(cpp_project_template)
+# Template 为项目名
+project(Template)
 
 # 要求使用 C++14 标准
 set(CMAKE_CXX_STANDARD 14)
 # 编译器不支持则报错
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
+# gtest 是 MT，或者设置 gtest_force_shared_crt ON
+if(MSVC)
+  set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} /MTd")
+  set(CMAKE_C_FLAGS_DEBUG "${CMAKE_C_FLAGS_DEBUG} /MTd")
+endif()
 
 # 设置构建类型（Debug或Release）
 if(NOT CMAKE_BUILD_TYPE)
