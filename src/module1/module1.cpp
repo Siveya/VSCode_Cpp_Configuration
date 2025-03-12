@@ -1,9 +1,8 @@
-#include "module1.h"
+#include "module1/module1.h"
 
-namespace module1
+namespace module1 {
+void greet(const std::string& name)
 {
-    void greet(const std::string& name)
-    {
-        std::cout << "Hello from Module 1, " << name << "!" << std::endl;
-    }
+    std::cout << "Hello from Module 1, " << name << "!" << std::endl;
+}
 }  // namespace module1
