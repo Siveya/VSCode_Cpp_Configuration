@@ -33,7 +33,19 @@
             "program": "${workspaceFolder}/build/Debug/Template",
             "args": [],
             "cwd": "${workspaceFolder}",
-            "stopOnEntry": false // 是否在入口处暂停
+            "stopOnEntry": false, // 是否在入口处暂停
+            "environment": []
+        },
+        {
+            "name": "Windows Debug",
+            "type": "cppvsdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/build/Debug/Template.exe",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "console": "integratedTerminal"
         }
     ]
 }

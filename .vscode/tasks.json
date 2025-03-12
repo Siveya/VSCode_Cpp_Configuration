@@ -1,107 +1,126 @@
 {
-	"version": "2.0.0",
-	"tasks": [
-		// CMake 任务可以用CMake Tools 插件代替
-		// 1. 配置 CMake
-		{
-			"label": "CMake: 配置 Debug",
-			"type": "shell",
-			"command": "cmake",
-			"args": [
-				"-S",
-				".",
-				"-B",
-				"${workspaceFolder}/build/Debug",
-				"-DCMAKE_BUILD_TYPE=Debug" // 设置 Debug 编译类型
-			],
-			"group": {
-				"kind": "build",
-				"isDefault": true
-			},
-			"problemMatcher": [],
-			"detail": "CMake Debug 配置任务"
-		},
-		{
-			"label": "CMake: 配置 Release",
-			"type": "shell",
-			"command": "cmake",
-			"args": [
-				"-S",
-				".",
-				"-B",
-				"${workspaceFolder}/build/Release",
-				"-DCMAKE_BUILD_TYPE=Release" // 设置 Release 编译类型
-			],
-			"group": "build",
-			"problemMatcher": [],
-			"detail": "CMake Release 配置任务"
-		},
-		// 2. 编译 CMake
-		{
-			"label": "CMake: 编译 Debug",
-			"type": "shell",
-			"command": "cmake",
-			"args": [
-				"--build",
-				"build/Debug" // 构建目录
-			],
-			"group": "build",
-			"problemMatcher": [],
-			"detail": "CMake 编译 Debug 任务"
-		},
-		{
-			"label": "CMake: 编译 Release",
-			"type": "shell",
-			"command": "cmake",
-			"args": [
-				"--build",
-				"build/Release" // 构建目录
-			],
-			"group": "build",
-			"problemMatcher": [],
-			"detail": "CMake 编译 Release 任务"
-		},
-		// 3. 清理构建目录
-		{
-			"label": "Clean Build",
-			"type": "shell",
-			"command": "rm",
-			"args": [
-				"-rf",
-				"build/*" // 清理构建目录
-			],
-			"group": "build",
-			"problemMatcher": [],
-			"detail": "清理构建目录中的文件"
-		},
-		// 组合任务
-		{
-			"label": "Rebuild",
-			"dependsOrder": "sequence", // "sequence"，任务按顺序执行。"parallel"， 并行执行任务
-			"dependsOn": [
-				"Clean Build",
-				"CMake: 配置 Debug",
-				"CMake: 编译 Debug",
-				"CMake: 配置 Release",
-				"CMake: 编译 Release"
-			],
-			"problemMatcher": [],
-			"detail": "清理并重新编译"
-		},
-		// 4. 运行单元测试
-		{
-			"label": "Run Tests",
-			"type": "shell",
-			"command": "ctest",
-			"args": [
-			],
-			"group": "test",
-			"problemMatcher": [],
-			"detail": "运行所有单元测试",
-			"options": {
-				"cwd": "${workspaceFolder}/build/Debug" // 设置工作目录
-			}
-		}
-		// 5. 安装 CMake
-	]
+    "version": "2.0.0",
+    "tasks": [
+        // CMake 任务可以用CMake Tools 插件代替
+        // 1. 配置 CMake
+        {
+            "label": "CMake: 配置 Debug",
+            "type": "shell",
+            "command": "cmake",
+            "args": [
+                "-S",
+                ".",
+                "-B",
+                "${workspaceFolder}/build/Debug",
+                "-DCMAKE_BUILD_TYPE=Debug" // 设置 Debug 编译类型
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": [],
+            "detail": "CMake Debug 配置任务"
+        },
+        {
+            "label": "CMake: 配置 Release",
+            "type": "shell",
+            "command": "cmake",
+            "args": [
+                "-S",
+                ".",
+                "-B",
+                "${workspaceFolder}/build/Release",
+                "-DCMAKE_BUILD_TYPE=Release" // 设置 Release 编译类型
+            ],
+            "group": "build",
+            "problemMatcher": [],
+            "detail": "CMake Release 配置任务"
+        },
+        // 2. 编译 CMake
+        {
+            "label": "CMake: 编译 Debug",
+            "type": "shell",
+            "command": "cmake",
+            "args": [
+                "--build",
+                "build/Debug",
+                "--config",
+                "Debug", // 构建目录
+                "-j",
+                "${env:NUMBER_OF_PROCESSORS}" // 使用多核编译
+            ],
+            "group": "build",
+            "problemMatcher": "$msCompile", // 使用 MS 编译器问题匹配器
+            "detail": "CMake 编译 Debug 任务"
+        },
+        {
+            "label": "CMake: 编译 Release",
+            "type": "shell",
+            "command": "cmake",
+            "args": [
+                "--build",
+                "build/Release",
+                "--config",
+                "Release",
+                "-j",
+                "${env:NUMBER_OF_PROCESSORS}"
+            ],
+            "group": "build",
+            "problemMatcher": "$msCompile",
+            "detail": "CMake 编译 Release 任务"
+        },
+        // 3. 清理构建目录
+        {
+            "label": "Clean Build",
+            "type": "shell",
+            "windows": {
+                "command": "if exist build rd /s /q build"
+            },
+            "linux": {
+                "command": "rm -rf build"
+            },
+            "osx": {
+                "command": "rm -rf build"
+            },
+            "group": "build",
+            "problemMatcher": [],
+            "detail": "清理构建目录中的文件"
+        },
+        // 组合任务
+        {
+            "label": "Rebuild All",
+            "dependsOrder": "sequence", // "sequence"，任务按顺序执行。"parallel"， 并行执行任务
+            "dependsOn": [
+                "Clean Build",
+                "CMake: 配置 Debug",
+                "CMake: 编译 Debug",
+                "CMake: 配置 Release",
+                "CMake: 编译 Release"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": [],
+            "detail": "清理并重新编译"
+        },
+        // 4. 运行单元测试
+        {
+            "label": "Run Tests",
+            "type": "shell",
+            "command": "ctest",
+            "args": [
+                "--output-on-failure",
+                "--build-config",
+                "Debug"
+            ],
+            "group": "test",
+            "options": {
+                "cwd": "${workspaceFolder}/build/Debug" // 设置工作目录
+            },
+            "problemMatcher": [],
+            "detail": "Run all unit tests"
+        }
+        // 5. 安装 CMake
+    ]
 }

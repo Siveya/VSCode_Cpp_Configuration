@@ -14,10 +14,18 @@
             "cStandard": "c17",
             "cppStandard": "c++20",
             // 指定 IntelliSense 模式
-            "intelliSenseMode": "linux-clang-x64",
+            "intelliSenseMode": "${default}",
             // VSCode 会使用 CMake Tools 插件来生成 IntelliSense 配置。
             // 这样做可以不用手动配置 includePath 和 defines。
-            "configurationProvider": "ms-vscode.cmake-tools"
+            "configurationProvider": "ms-vscode.cmake-tools",
+            // 指定 IntelliSense 的浏览配置。
+            "browse": {
+                "path": [
+                    "${workspaceFolder}"
+                ],
+                // 限制符号只包含在包含的头文件中。
+                "limitSymbolsToIncludedHeaders": true
+            }
         },
         {
             "name": "Linux gcc",
@@ -28,8 +36,14 @@
             "compilerPath": "/usr/bin/g++",
             "cStandard": "c17",
             "cppStandard": "c++20",
-            "intelliSenseMode": "linux-gcc-x64",
-            "configurationProvider": "ms-vscode.cmake-tools"
+            "intelliSenseMode": "${default}",
+            "configurationProvider": "ms-vscode.cmake-tools",
+            "browse": {
+                "path": [
+                    "${workspaceFolder}"
+                ],
+                "limitSymbolsToIncludedHeaders": true
+            }
         },
         {
             "name": "macOS Clang",
@@ -37,11 +51,22 @@
                 "${workspaceFolder}/**"
             ],
             "defines": [],
-            "compilerPath": "/usr/bin/clang",
+            "compilerPath": "/usr/bin/clang++",
             "cStandard": "c17",
             "cppStandard": "c++20",
-            "intelliSenseMode": "macos-clang-arm64",
-            "configurationProvider": "ms-vscode.cmake-tools"
+            "intelliSenseMode": "${default}",
+            "configurationProvider": "ms-vscode.cmake-tools",
+            "browse": {
+                "path": [
+                    "${workspaceFolder}"
+                ],
+                "limitSymbolsToIncludedHeaders": true
+            },
+            // 指定 macOS 框架路径
+            "macFrameworkPath": [
+                "/Library/Frameworks",
+                "/System/Library/Frameworks"
+            ]
         },
         {
             "name": "macOS GCC",
@@ -53,16 +78,27 @@
             "cStandard": "c17",
             "cppStandard": "c++20",
             "intelliSenseMode": "macos-gcc-x64",
-            "configurationProvider": "ms-vscode.cmake-tools"
+            "configurationProvider": "ms-vscode.cmake-tools",
+            "browse": {
+                "path": [
+                    "${workspaceFolder}"
+                ],
+                "limitSymbolsToIncludedHeaders": true
+            }
         },
         // C_Cpp: IntelliSenseEngine 的开关打开 (装了 clang，你将无法把 C_Cpp：Intelli Sense Engine 开关设置为 Default, 需卸载clangd)
         {
-            "name": "Windows x64",
+            "name": "Win32",
             "includePath": [
                 "${workspaceFolder}/**"
             ],
-            "defines": [],
-            "compilerPath": "C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.36.32532/bin/Hostx64/x64/cl.exe",
+            "defines": [
+                "_DEBUG",
+                "UNICODE",
+                "_UNICODE"
+            ],
+            "windowsSdkVersion": "10.0.22000.0",
+            "compilerPath": "cl.exe",
             "cStandard": "c17",
             "cppStandard": "c++20",
             "intelliSenseMode": "windows-msvc-x64",

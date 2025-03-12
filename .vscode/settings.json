@@ -1,6 +1,10 @@
 {
     // 使用 .clang-format 格式化代码, 需要 C/C++ 扩展。
     "C_Cpp.clang_format_style": "file",
+    "C_Cpp.formatting": "clangFormat",
+    "C_Cpp.intelliSenseEngine": "default",
+    "C_Cpp.default.cppStandard": "c++20",
+    "C_Cpp.default.cStandard": "c17",
     "[cpp]": {
         "editor.defaultFormatter": "ms-vscode.cpptools",
         // 保存自动格式化
@@ -13,7 +17,22 @@
     // 4 个空格缩进
     "editor.tabSize": 4,
     "editor.insertSpaces": true,
+    "editor.detectIndentation": false,
     "files.encoding": "utf8",
+    "files.trimTrailingWhitespace": true,
+    "files.insertFinalNewline": true,
+    "files.trimFinalNewlines": true,
+    "files.eol": "\n",
+    "files.exclude": {
+        "**/.git": true,
+        "**/.svn": true,
+        "**/.hg": true,
+        "**/CVS": true,
+        "**/.DS_Store": true,
+        "**/Thumbs.db": true,
+        "build/": false,
+        "install/": false
+    },
     "files.associations": {
         "string": "cpp",
         "__bit_reference": "cpp",
