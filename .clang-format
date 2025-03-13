@@ -2,11 +2,11 @@ Language: Cpp
 BasedOnStyle: Chromium
 IndentWidth: 4
 AccessModifierOffset: -4
-ColumnLimit: 0
-BreakBeforeBraces: Custom
+ColumnLimit: 120
 NamespaceIndentation: None
 UseTab: Never
 SeparateDefinitionBlocks: Always
+BreakBeforeBraces: Custom
 BraceWrapping:
   AfterClass: true
   AfterControlStatement: false
