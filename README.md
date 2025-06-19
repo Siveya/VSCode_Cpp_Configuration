@@ -1,17 +1,28 @@
-# C++ 项目模板
+# 🚀 现代 C++ 项目模板
 
-## 项目介绍
-这是一个现代 C++ 项目模板，提供了完整的项目结构、构建系统和开发工具链配置。
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+[![C++17](https://img.shields.io/badge/C%2B%2B-17-blue.svg)](https://en.cppreference.com/w/cpp/17)
 
-## 特性
-- 现代 CMake 构建系统
-- C++17 标准支持
-- 预编译头文件支持
-- 单元测试框架 (Google Test)
-- 性能测试支持 (Google Benchmark)
-- 代码格式化 (clang-format)
-- VS Code 配置
-- 示例代码和文档
+## 📖 项目介绍
+这是一个现代、功能完整的 C++ 项目模板，集成了业界最佳实践和现代开发工具链。适合快速启动新的 C++ 项目。
+
+## ✨ 核心特性
+
+### 🔧 构建系统
+- **现代 CMake 3.12+** - 支持最新的 CMake 特性
+- **多平台支持** - Linux、Windows、macOS
+
+### 🧪 测试和质量保证
+- **单元测试** - Google Test 框架
+
+### 🚀 DevOps 和 CI/CD
+- **GitHub Actions** - 自动化构建、测试、部署
+- **多编译器支持** - GCC、Clang、MSVC
+
+### 🎨 开发体验
+- **VS Code 集成** - 完整的开发环境配置
+- **代码格式化** - clang-format 统一代码风格
+- **Git Hook** - 自动化代码检查
 
 ## 项目结构
 ```shell
@@ -44,16 +55,12 @@ cpp_project_template/
 ├── examples/                 # 示例代码
 │   ├── basic_usage.cpp      # 基本用法示例
 │   └── CMakeLists.txt       # 示例构建配置
-├── benchmarks/              # 性能测试
-│   ├── benchmark_test.cpp   # 性能测试代码
-│   └── CMakeLists.txt       # 性能测试构建配置
 ├── build/                      # 构建输出目录
 ├── docs/                    # 文档
 ├── scripts/                 # 工具脚本
 ├── third_party/            # 第三方依赖
 │   ├── googletest/         # Google Test 源码 用于单元测试
 │   └── library2/
-├── assets/                 # 资源文件
 ├── CMakeLists.txt         # 主构建文件
 ├── .clang-format          # 代码格式化配置
 ├── .gitignore            # Git 忽略配置
@@ -67,29 +74,44 @@ cpp_project_template/
 - 支持 C++17 的编译器
 - Git（用于获取依赖）
 
-## 快速开始
+## 🚀 快速开始
 
-1. 克隆仓库并初始化子模块：
+### 方式一：使用构建脚本（推荐）
+
 ```bash
+# 1. 克隆仓库
 git clone https://github.com/yourusername/cpp_project_template.git
 cd cpp_project_template
 git submodule update --init --recursive
+
+# 2. 使用构建脚本
+chmod +x scripts/build.sh
+./scripts/build.sh --help  # 查看所有选项
+
+# 3. 默认构建
+./scripts/build.sh
+
+# 4. 开发构建（包含调试信息和代码覆盖率）
+./scripts/build.sh -d -c -s
 ```
 
-2. 创建构建目录并构建：
+### 方式二：手动构建
+
 ```bash
+# 1. 克隆仓库
+git clone https://github.com/yourusername/cpp_project_template.git
+cd cpp_project_template
+git submodule update --init --recursive
+
+# 2. 配置和构建
 mkdir build && cd build
-cmake ..
-make
-```
+cmake .. -DCMAKE_BUILD_TYPE=Release
+make -j$(nproc)
 
-3. 运行测试：
-```bash
-ctest
-```
+# 3. 运行测试
+ctest --output-on-failure
 
-4. 运行示例：
-```bash
+# 4. 运行示例
 ./examples/basic_usage
 ```
 
@@ -97,21 +119,13 @@ ctest
 在 CMake 配置时可以使用以下选项：
 - `TEMPLATE_BUILD_TESTS`: 构建单元测试 (默认: ON)
 - `TEMPLATE_BUILD_EXAMPLES`: 构建示例 (默认: ON)
-- `TEMPLATE_BUILD_BENCHMARKS`: 构建性能测试 (默认: OFF)
 - `TEMPLATE_ENABLE_WARNINGS`: 启用警告 (默认: ON)
-- `TEMPLATE_BUILD_SHARED`: 构建共享库 (默认: OFF)
 
 示例：
 ```bash
-cmake -DTEMPLATE_BUILD_TESTS=OFF -DTEMPLATE_BUILD_SHARED=ON ..
+cmake -DTEMPLATE_BUILD_TESTS=OFF -DTEMPLATE_BUILD_EXAMPLES=ON ..
 ```
 
-## VS Code 集成
-项目包含完整的 VS Code 配置：
-- 智能代码补全
-- 调试支持
-- 任务运行器
-- 代码格式化
 
 ## 许可证
 [许可证名称] - 查看 [LICENSE](LICENSE) 文件了解详情。

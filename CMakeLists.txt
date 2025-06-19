@@ -15,9 +15,7 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 # 编译选项
 option(TEMPLATE_BUILD_TESTS "Build tests" ON)
 option(TEMPLATE_BUILD_EXAMPLES "Build examples" ON)
-option(TEMPLATE_BUILD_BENCHMARKS "Build benchmarks" OFF)
 option(TEMPLATE_ENABLE_WARNINGS "Enable warnings" ON)
-option(TEMPLATE_BUILD_SHARED "Build shared library" OFF)
 
 # 设置默认构建类型
 if(NOT CMAKE_BUILD_TYPE)
@@ -62,9 +60,6 @@ if(TEMPLATE_BUILD_EXAMPLES)
     add_subdirectory(examples)
 endif()
 
-if(TEMPLATE_BUILD_BENCHMARKS)
-    add_subdirectory(benchmarks)
-endif()
 
 # 安装配置
 include(GNUInstallDirs)
