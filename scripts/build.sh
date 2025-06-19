@@ -35,12 +35,14 @@ show_help() {
     -n, --ninja             使用 Ninja 构建 (默认: Make)
     --clean                 清理构建目录
     -j, --jobs NUM          并行任务数 (默认: CPU核心数)
+    --setup-hooks           安装Git提交规范检查钩子
 
 示例:
     $0                      # 默认Release构建
     $0 -d -c               # Debug构建并启用覆盖率
     $0 -d -s               # Debug构建并启用内存检查
     $0 --clean -d          # 清理并进行Debug构建
+    $0 --setup-hooks       # 仅安装Git hooks
 EOF
 }
 
@@ -84,6 +86,10 @@ while [[ $# -gt 0 ]]; do
             PARALLEL_JOBS="$2"
             shift 2
             ;;
+        --setup-hooks)
+            SETUP_HOOKS="ON"
+            shift
+            ;;
         *)
             echo "未知选项: $1"
             show_help
@@ -94,6 +100,14 @@ done
 
 # 项目根目录
 PROJECT_ROOT=$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)
+
+# 如果只是安装hooks，则执行安装后退出
+if [[ "$SETUP_HOOKS" == "ON" ]]; then
+    echo "安装Git提交规范检查钩子..."
+    "$PROJECT_ROOT/scripts/install-hooks.sh"
+    echo "Git hooks安装完成！"
+    exit 0
+fi
 BUILD_DIR="$PROJECT_ROOT/build"
 
 echo "===== C++ 项目构建脚本 ====="

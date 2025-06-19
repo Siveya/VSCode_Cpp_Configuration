@@ -1,0 +1,79 @@
+#!/bin/bash
+
+# Git commit-msg hook
+# 验证提交消息是否符合项目规范
+
+commit_regex='^(feat|fix|docs|style|refactor|perf|test|build|ci|chore|revert|hotfix|wip)(\(.+\))?: .{1,50}'
+
+# 读取提交消息
+commit_message=$(cat "$1")
+
+# 跳过merge提交
+if echo "$commit_message" | grep -qE "^Merge (branch|remote-tracking branch)"; then
+    exit 0
+fi
+
+# 跳过revert提交的详细检查
+if echo "$commit_message" | grep -qE "^revert: "; then
+    exit 0
+fi
+
+# 检查提交消息格式
+if ! echo "$commit_message" | head -1 | grep -qE "$commit_regex"; then
+    echo "❌ 提交消息格式不正确!"
+    echo ""
+    echo "正确格式: <type>(<scope>): <subject>"
+    echo ""
+    echo "type 必须是以下之一:"
+    echo "  feat     - 新功能"
+    echo "  fix      - 修复bug"
+    echo "  docs     - 文档更改"
+    echo "  style    - 代码格式"
+    echo "  refactor - 代码重构"
+    echo "  perf     - 性能优化"
+    echo "  test     - 测试"
+    echo "  build    - 构建系统"
+    echo "  ci       - CI配置"
+    echo "  chore    - 构建工具、依赖等"
+    echo "  revert   - 撤销提交"
+    echo "  hotfix   - 紧急修复"
+    echo "  wip      - 进行中的工作"
+    echo ""
+    echo "示例:"
+    echo "  feat(auth): add login functionality"
+    echo "  fix(cart): correct price calculation"
+    echo "  docs: update README"
+    echo ""
+    echo "当前提交消息:"
+    echo "  $commit_message"
+    echo ""
+    exit 1
+fi
+
+# 检查标题长度
+title=$(echo "$commit_message" | head -1)
+if [ ${#title} -gt 100 ]; then
+    echo "❌ 提交消息标题过长!"
+    echo "标题长度: ${#title} 字符 (最大 100 字符)"
+    echo "当前标题: $title"
+    exit 1
+fi
+
+# 检查是否以大写字母开头
+subject=$(echo "$title" | sed -E 's/^[a-z]+(\(.+\))?: //')
+if echo "$subject" | grep -qE "^[A-Z]"; then
+    echo "❌ 主题描述不应以大写字母开头!"
+    echo "当前主题: $subject"
+    echo "建议修改为: $(echo "$subject" | sed 's/^./\L&/')"
+    exit 1
+fi
+
+# 检查是否以句号结尾
+if echo "$title" | grep -qE "\.$"; then
+    echo "❌ 主题描述不应以句号结尾!"
+    echo "当前标题: $title"
+    exit 1
+fi
+
+echo "✅ 提交消息格式正确!"
+exit 0
